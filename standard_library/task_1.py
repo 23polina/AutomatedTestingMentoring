@@ -5,9 +5,8 @@ from datetime import date
 def load_people_from_file(file_path):
     if not os.path.exists(file_path):
         raise FileNotFoundError(f"File NOT found {file_path}")
-    else:
-        with open(file_path) as data:
-            return json.load(data)
+    with open(file_path) as data:
+        return json.load(data)
 
 def filter_people_under18():
     people_data = load_people_from_file("json_program1.json")
