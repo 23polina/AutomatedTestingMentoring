@@ -2,12 +2,13 @@ from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
 from enum import Enum
 from typing import ClassVar
+from typing import Optional
 
 @dataclass
 class Employee(ABC):
     name: str
     emp_id: str = None
-    _company: str = None
+    _company: Optional["Company"] = None
     _last_assigned_id: ClassVar[int] = 0
 
     def __post_init__(self):
@@ -84,7 +85,7 @@ class Company:
 
 
     def hire(self, employee):
-        if employee.company is None and employee not in self.employees:
+        if employee.company is None:
             self.employees.append(employee)
             employee.company = self
             return f"{employee.name} is successfully hired"
@@ -102,12 +103,15 @@ class Company:
 
     def raise_pay(self, employee, raise_value):
         if employee.company is self:
-            if isinstance(employee, HourlyEmployee):
-                employee.hourly_rate += raise_value
-                return f"{employee.name} has {employee.hourly_rate} hourly rate"
-            elif isinstance(employee, SalariedEmployee):
-                employee.salary += raise_value
-                return f"{employee.name} has {employee.salary} salary"
+            if raise_value >= 0:
+                if isinstance(employee, HourlyEmployee):
+                    employee.hourly_rate += raise_value
+                    return f"{employee.name} has {employee.hourly_rate} hourly rate"
+
+                elif isinstance(employee, SalariedEmployee):
+                    employee.salary += raise_value
+                    return f"{employee.name} has {employee.salary} salary"
+            return f"{raise_value} raise pay value cannot be negative"
         else:
             return f"{employee.name} does NOT work at {self.name}"
 

@@ -19,16 +19,16 @@ def test_create_several_employees():
     empl_hourly_2 = HourlyEmployee("Anna", _hourly_rate=100)
 
     assert empl_salary_1.name == "Alice"
-    assert empl_salary_1._salary == 4500
+    assert empl_salary_1.salary == 4500
 
     assert empl_salary_2.name == "John"
-    assert empl_salary_2._salary == 2300
+    assert empl_salary_2.salary == 2300
 
     assert empl_hourly_1.name == "Kevin"
-    assert empl_hourly_1._hourly_rate == 80
+    assert empl_hourly_1.hourly_rate == 80
 
     assert empl_hourly_2.name == "Anna"
-    assert empl_hourly_2._hourly_rate == 100
+    assert empl_hourly_2.hourly_rate == 100
 
 
 def test_hire_salaried_employees_into_company(company_1, alice, anna):
@@ -42,6 +42,7 @@ def test_hire_salaried_employees_into_company(company_1, alice, anna):
     assert anna.emp_id in empl_ids
     assert len(company_1.employees) == 2
     assert len(empl_ids) == len(set(empl_ids))
+
 
 def test_hire_employees_into_company(company_2, kevin, barbara, anna):
     company_2.hire(anna)
@@ -57,6 +58,7 @@ def test_hire_employees_into_company(company_2, kevin, barbara, anna):
     assert len(empl_ids) == len(set(empl_ids))
     assert len(company_2.employees) == 3
 
+
 def test_hire_same_employee_twice(company_1, anna):
     result = company_1.hire(anna)
     assert result == "Anna is successfully hired"
@@ -64,6 +66,18 @@ def test_hire_same_employee_twice(company_1, anna):
     result_2 = company_1.hire(anna)
     assert result_2 == "Anna is already employed by Blue Print company"
     assert len(company_1.employees) == 1
+
+
+def test_hire_same_employee_into_2_companies(company_1, company_2, anna):
+    result_company_1 = company_1.hire(anna)
+    result_company_2 = company_2.hire(anna)
+
+    assert result_company_1 == "Anna is successfully hired"
+    assert result_company_2 == "Anna is already employed by Blue Print company"
+
+    assert len(company_1.employees) == 1
+    assert len(company_2.employees) == 0
+
 
 def test_fire_employees(company_with_staff, kevin):
     count_before = len(company_with_staff.employees)
@@ -74,18 +88,21 @@ def test_fire_employees(company_with_staff, kevin):
     assert kevin.company is None
     assert len(company_with_staff.employees) == count_before - 1
 
-def test_fire_not_employed_employee(company_with_staff,alice):
+
+def test_fire_not_employed_employee(company_with_staff, alice):
     count_before = len(company_with_staff.employees)
     fired_result = company_with_staff.fire(alice)
 
     assert fired_result == "Alice does NOT work at Blue Print"
     assert len(company_with_staff.employees) == count_before
 
+
 def test_set_get_salary_for_salaried_empl(alice, anna):
     alice.salary = 1000
 
     assert alice.salary == 1000
     assert anna.salary == 8000
+
 
 def test_set_get_hourly_pay_empl(kevin, barbara):
     kevin.hourly_rate = 100
@@ -123,6 +140,17 @@ def test_increase_salary_hourly_rate(company_with_staff, anna, kevin, barbara, a
     assert barbara.hourly_rate == 100
     assert result_alice == "Alice does NOT work at Blue Print"
 
+
+def test_negative_increase_salary_hourly_rate(company_with_staff, anna, barbara):
+    increase_salary_anna = company_with_staff.raise_pay(anna, -1000)
+    increase_hourly_pay_barbara = company_with_staff.raise_pay(barbara, -8)
+
+    assert increase_salary_anna == "-1000 raise pay value cannot be negative"
+    assert anna.salary == 8000
+    assert increase_hourly_pay_barbara == "-8 raise pay value cannot be negative"
+    assert barbara.hourly_rate == 20
+
+
 def test_leave_company_by_employee(company_with_staff, alice, barbara):
     result_before = len(company_with_staff.employees)
     result_barbara = barbara.leave_company()
@@ -139,7 +167,3 @@ def test_company_representation(company_with_staff):
     representation = company_with_staff.__repr__()
 
     assert representation == "Company(Blue Print, HEALTHCARE, Employees:3)"
-
-
-
-
