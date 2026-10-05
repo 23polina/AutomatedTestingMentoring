@@ -1,7 +1,8 @@
 import pytest
 
 
-from object_oriented_programming.task3 import Company, Domain, SalariedEmployee, HourlyEmployee
+from object_oriented_programming.task3 import Company, Domain, SalariedEmployee, HourlyEmployee, Employee
+
 
 @pytest.fixture
 def company_1():
@@ -34,4 +35,8 @@ def company_with_staff(company_1, anna, kevin, barbara):
     company_1.hire(barbara)
     return company_1
 
-
+@pytest.fixture(autouse=True)
+def reset_employee_assigned_id_to_0():
+    Employee._last_assigned_id = 0
+    yield
+    Employee._last_assigned_id = 0

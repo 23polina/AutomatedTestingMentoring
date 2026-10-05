@@ -1,6 +1,5 @@
 from object_oriented_programming.task3 import Company, HourlyEmployee, SalariedEmployee, Domain
 
-
 def test_several_companies_created():
     company_1 = Company("Blue Print", Domain.HEALTHCARE)
     company_2 = Company("CapgemCom", Domain.TECHNOLOGY)
@@ -20,16 +19,19 @@ def test_create_several_employees():
 
     assert empl_salary_1.name == "Alice"
     assert empl_salary_1.salary == 4500
+    assert empl_salary_1.emp_id == "E1"
 
     assert empl_salary_2.name == "John"
     assert empl_salary_2.salary == 2300
+    assert empl_salary_2.emp_id == "E2"
 
     assert empl_hourly_1.name == "Kevin"
     assert empl_hourly_1.hourly_rate == 80
+    assert empl_hourly_1.emp_id == "E3"
 
     assert empl_hourly_2.name == "Anna"
     assert empl_hourly_2.hourly_rate == 100
-
+    assert empl_hourly_2.emp_id == "E4"
 
 def test_hire_salaried_employees_into_company(company_1, alice, anna):
     result_alice = company_1.hire(alice)
