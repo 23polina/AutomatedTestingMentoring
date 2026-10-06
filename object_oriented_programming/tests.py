@@ -44,6 +44,8 @@ def test_hire_salaried_employees_into_company(company_1, alice, anna):
     assert anna.emp_id in empl_ids
     assert len(company_1.employees) == 2
     assert len(empl_ids) == len(set(empl_ids))
+    assert alice.company is company_1
+    assert anna.company is company_1
 
 
 def test_hire_employees_into_company(company_2, kevin, barbara, anna):
@@ -59,6 +61,9 @@ def test_hire_employees_into_company(company_2, kevin, barbara, anna):
     assert barbara.emp_id in empl_ids
     assert len(empl_ids) == len(set(empl_ids))
     assert len(company_2.employees) == 3
+    assert kevin.company is company_2
+    assert barbara.company is company_2
+    assert anna.company is company_2
 
 
 def test_hire_same_employee_twice(company_1, anna):
