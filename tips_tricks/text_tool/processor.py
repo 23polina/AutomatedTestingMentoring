@@ -1,9 +1,9 @@
 import re
 
-from text_tool.decorators import function_execution_decorator
+from text_tool.decorators import calculate_func_execution_time_decorator
 
 
-@function_execution_decorator
+@calculate_func_execution_time_decorator
 def get_word_frequency_report(text):
     search_text = re.findall(r"\w+", text.lower())
     dict_final_result = {}

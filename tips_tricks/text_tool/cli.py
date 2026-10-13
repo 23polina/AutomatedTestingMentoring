@@ -1,7 +1,6 @@
 import argparse
 import logging
 import sys
-from logging import basicConfig
 
 from text_tool.file_io import read_file, write_file
 from text_tool.processor import get_word_frequency_report
@@ -52,4 +51,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
