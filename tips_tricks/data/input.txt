@@ -1,0 +1,10 @@
+The quick brown fox jumps over the lazy dog. The dog was not amused, but the fox did not care.
+
+Python is a great language. Python is easy to read, and Python is fun to write!
+Many developers love Python because it is simple, clear, and powerful.
+
+Testing is important. Good tests catch bugs early, and good developers write tests every day.
+Without tests, a bug can hide in the code for a long time.
+
+The fox and the dog became friends in the end.
+Friends help each other, and the best friends never give up.
