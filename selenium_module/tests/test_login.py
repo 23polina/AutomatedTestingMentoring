@@ -1,12 +1,13 @@
 from selenium_module.data.test_data import VALID_USERNAME, PASSWORD, LOCKED_USERNAME, INVALID_USERNAME, INVALID_PASSWORD
 
 
-def test_successful_login(login_page):
+def test_successful_login(login_page, navigator):
     """Check login with valid Username and Password"""
-    swag_labs_page = login_page.login(VALID_USERNAME, PASSWORD)
+    login_page.login(VALID_USERNAME, PASSWORD)
+    products_page = navigator.products_page()
 
-    assert swag_labs_page.get_page_title() == "Swag Labs"
-    assert swag_labs_page.get_section_title() == "Products"
+    assert products_page.get_page_title() == "Swag Labs"
+    assert products_page.get_section_title() == "Products"
 
 
 def test_locked_out_user(login_page):

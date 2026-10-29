@@ -1,9 +1,8 @@
 from selenium.webdriver.common.by import By
 from selenium_module.pages.base_page import BasePage
-from selenium_module.pages.checkout_page import Checkout
 
 
-class YourCart(BasePage):
+class CartPage(BasePage):
     CART_ITEMS = (By.XPATH, "//*[@data-test='inventory-item-name']")
     REMOVE_BUTTON = (By.XPATH, "//div[@data-test='inventory-item-name'][normalize-space()='{product_name}']/ancestor::div[@data-test='inventory-item']//button[contains(@id, 'remove')]")
     CONTINUE_SHOPPING_BUTTON = (By.ID, "continue-shopping")
@@ -23,10 +22,7 @@ class YourCart(BasePage):
         self.click((by, value.format(product_name=product_name)))
 
     def continue_shopping(self):
-        from selenium_module.pages.swag_labs_page import SwagLabs
         self.click(self.CONTINUE_SHOPPING_BUTTON)
-        return SwagLabs(self.driver)
 
     def checkout(self):
         self.click(self.CHECKOUT_BUTTON)
-        return Checkout(self.driver)

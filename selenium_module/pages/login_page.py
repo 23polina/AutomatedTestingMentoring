@@ -1,6 +1,5 @@
 from selenium.webdriver.common.by import By
 from selenium_module.pages.base_page import BasePage
-from selenium_module.pages.swag_labs_page import SwagLabs
 
 
 class LoginPage(BasePage):
@@ -21,7 +20,6 @@ class LoginPage(BasePage):
 
     def login(self, username, password):
         self.fill_and_submit(username, password)
-        return SwagLabs(self.driver)
 
     def login_with_invalid_data(self, username, password):
         self.fill_and_submit(username, password)

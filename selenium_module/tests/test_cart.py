@@ -7,10 +7,11 @@ def test_delete_item_from_cart(added_products):
     assert added_products.get_items_in_cart() == ["Sauce Labs Bike Light"]
 
 
-def test_state_of_deleted_product(added_products):
+def test_state_of_deleted_product(added_products, navigator):
     """Check button state for an item in cart and removed item from cart"""
     added_products.remove_item_from_cart_page("Sauce Labs Backpack")
-    shopping_page = added_products.continue_shopping()
+    added_products.continue_shopping()
+    products_page = navigator.products_page()
 
-    assert shopping_page.get_button_text("Sauce Labs Backpack") == "Add to cart"
-    assert shopping_page.get_button_text("Sauce Labs Bike Light") == "Remove"
+    assert products_page.get_button_text("Sauce Labs Backpack") == "Add to cart"
+    assert products_page.get_button_text("Sauce Labs Bike Light") == "Remove"

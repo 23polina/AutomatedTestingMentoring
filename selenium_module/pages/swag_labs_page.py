@@ -1,9 +1,8 @@
 from selenium.webdriver.common.by import By
 from selenium_module.pages.base_page import BasePage
-from selenium_module.pages.cart_page import YourCart
 
 
-class SwagLabs(BasePage):
+class ProductsPage(BasePage):
     PAGE_TITLE = (By.CLASS_NAME, "app_logo")
     PRODUCTS_TITLE = (By.CLASS_NAME, "title")
     PRODUCT_BUTTON = (
@@ -36,4 +35,3 @@ class SwagLabs(BasePage):
 
     def go_to_cart(self):
         self.click(self.CART_BADGE)
-        return YourCart(self.driver)

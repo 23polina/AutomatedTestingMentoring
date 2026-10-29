@@ -1,6 +1,5 @@
 from selenium.webdriver.common.by import By
 from selenium_module.pages.base_page import BasePage
-from selenium_module.pages.checkout_complete_page import CheckoutComplete
 
 
 class CheckoutOverviewPage(BasePage):
@@ -32,4 +31,3 @@ class CheckoutOverviewPage(BasePage):
 
     def finish_checkout(self):
         self.click(self.FINISH_BUTTON)
-        return CheckoutComplete(self.driver)
